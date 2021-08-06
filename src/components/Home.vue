@@ -116,6 +116,7 @@
 			},
 			loginOut(){
 				window.sessionStorage.clear()
+				this.$router.push('/')
 				this.$router.go(0)
 			},
 			goUgrzl(){

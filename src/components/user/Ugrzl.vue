@@ -6,8 +6,16 @@
 			</div>
 			<hr>
 			<div class="touxiang">
-				<img src="../../assets/01.png" alt="头像">
-				<button>更换头像</button>
+				<img :src="imgSrc" alt="头像" title="放大" @click="imgFaDa()">
+				<span>
+					<form action="http://127.0.0.1:3000/touXiang" method="POST" enctype="multipart/form-data" class="formTx" name="touXiangForm" target="tg">
+						<!-- name属性一定一定要加上 -->
+						<input type="file" accept="image/*" class="touInput" name="pic" @change="handleFile">
+					</form>
+					<button @click="upload()" class="touButton">上传头像</button>
+				</span>
+				<!-- form的默认跳转到这里 -->
+				<iframe name="tg" id="tg" style="display: none;"></iframe>
 			</div>
 
 			<div>
@@ -42,13 +50,50 @@
 					</div>
 					<div>
 						<span>个人简介</span>
-						<textarea :value="formGet.grjj"></textarea>
+						<textarea v-model="formGet.grjj"></textarea>
 					</div>
 					<input value="提交修改" type="button" class="submit" @click="post_grzl()">
 				</form>
 			</div>
 		</div>
+		<template>
+			<el-dialog
+			  title="提示"
+			  :visible.sync="dialogVisible"
+			  width="35%"
+			  center>
+			  <span class="dialogSpan">
+			  	<img :src="dialogImgSrc">
+			  </span>
+			  <template #footer>
+			    <span class="dialog-footer">
+			      <el-button @click="postCancel">取 消</el-button>
+			      <el-button type="primary" @click="postSure">确 定</el-button>
+			    </span>
+			  </template>
+			</el-dialog>
+		</template>
+
+		<!-- 头像的放大 -->
+		<template>
+			<el-dialog
+			  title="大图"
+			  :visible.sync="touXiangDialogVisible"
+			  width="35%"
+			  center>
+			  <span class="dialogSpan">
+			  	<img :src="dialogImgSrc">
+			  </span>
+			  <template #footer>
+			    <span class="dialog-footer">
+			      <el-button @click="touXiangDialogVisible = false">取 消</el-button>
+			      <el-button type="primary" @click="touXiangDialogVisible = false">确 定</el-button>
+			    </span>
+			  </template>
+			</el-dialog>
+		</template>
 	</div>
+
 </template>
 
 <script>
@@ -61,10 +106,6 @@
 				formGet: {
 
 				},
-				// 要提交的表单数据
-				formPost: {
-
-				},
 				// option选中的城市
 				city1: {},
 				city11: '',
@@ -73,7 +114,11 @@
 				city3: {},
 				city33: '',
 				// 请求user信息时要上传的参数
-				queryInfo: {}
+				queryInfo: {},
+				imgSrc: require("../touxiang.jpg"),
+				dialogVisible: false,
+				dialogImgSrc: require("../touxiang.jpg"),
+				touXiangDialogVisible: false
 			}
 		},
 		created(){
@@ -86,9 +131,15 @@
 		methods: {
 			async getUserMsg(){
 				let {data: res} = await this.$http.get("/user/grzl", { params: this.queryInfo })
-				console.log(res)
+				console.log(res.data)
 				if(res.meta.status!==200){ return this.$message.error("获取用户信息失败") }
 				this.formGet = res.data
+				this.city1 = res.data.address.city1
+				this.city11 = res.data.address.city11
+				this.city2 = res.data.address.city2
+				this.city22 = res.data.address.city22
+				this.city3 = res.data.address.city3
+				this.city33 = res.data.address.city33
 			},
 			changeProduct1() {
 				this.city11 = this.city1.value
@@ -115,8 +166,51 @@
            		this.name = ""
            	},
            	async post_grzl(){
-           		var data = await this.$http.post('/user/grzl', this.formGet)
-           		console.log(data)
+           		this.formGet.address.city1 = this.city1
+           		this.formGet.address.city11 = this.city11
+           		this.formGet.address.city2 = this.city2
+           		this.formGet.address.city22 = this.city22
+           		this.formGet.address.city3 = this.city3
+           		this.formGet.address.city33 = this.city33
+           		var {data: res} = await this.$http.post('/user/grzl', this.formGet)
+           		// console.log(res)
+           		if(res.meta.status !== 200){ return this.$message.error("信息更新失败！") }
+           		this.$message.success("信息更新成功！")
+           		this.getUserMsg()
+           	},
+           	upload(){
+           		this.$el.querySelector('.touInput').click()
+           	},
+           	handleFile(e){
+           		console.log(e)
+           		let target = e.target || e.srcElement
+           		console.log(target.files)
+           		let file = target.files[0]
+           		if(file.size > 130000){
+           			return this.$message.error("图片过大")
+           		}
+           		this.dialogVisible = true
+
+           	},
+           	// 头像放大
+           	imgFaDa(){
+           		this.touXiangDialogVisible = true
+           	},
+           	// 取消上传
+           	postCancel(){
+           		this.dialogVisible = false
+           		this.$message.warning("上传取消")
+           		// 解决当选择两次同样的图片时，不响应的问题
+           		this.$el.querySelector('.touInput').value = ""
+           	},
+           	// 确定上传
+           	postSure(){
+           		this.dialogVisible = false
+           		let res = document.touXiangForm.submit()
+           		console.log(res)
+           		// 解决当选择两次同样的图片时，不响应的问题
+           		this.$el.querySelector('.touInput').value = ""
+           		this.$message.success("上传成功")
            	}
 		}
 	}
@@ -152,6 +246,9 @@
 			width: 15%;
 			height: auto;
 		}
+		div span input{
+			// width: 1px;
+		}
 	}
 	.nicheng{
 		height: 25px;
@@ -169,6 +266,20 @@
 	}
 	.block{
 		display: inline-block;
+	}
+	.touButton{
+		margin-left: 10%;
+	}
+	.dialogSpan{
+		display: flex;
+		justify-content: center;
+		img{
+			width: 80%;
+			height: auto;
+		}
+	}
+	.formTx{
+		display: none;
 	}
 	
 </style>
