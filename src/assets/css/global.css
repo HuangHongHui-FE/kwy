@@ -8,5 +8,7 @@ html, body {
   vertical-align: baseline;
   /*background-image: url(../02.jpeg);*/
   /*background-attachment:fixed;*/
-  background-color: rgb(43, 75, 107) ;
+  background-color: #E0FFFF;
+  line-height: 30px;
+  /* min-width: 1000px; */
 }
