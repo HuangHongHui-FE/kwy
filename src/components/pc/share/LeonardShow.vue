@@ -1,182 +1,129 @@
+
 <template>
-    <div>
-        <div class="slider">
-            <div class="container">
-                <div class="slide x"></div>
-                <div class="slide y"></div>
-                <div class="slide z"></div>
-            </div>
-            <div class="shadow"></div>
-        </div>
-    </div>
+  <div class="thumb-example">
+    <!-- swiper1 -->
+    <swiper class="swiper gallery-top" :options="swiperOptionTop" ref="swiperTop">
+      <swiper-slide v-for="(src, index) in imgSrcLsCom" :key="index">
+          <img :src="src">
+      </swiper-slide>
+
+      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+    </swiper>
+    <!-- swiper2 Thumbs -->
+    <swiper class="swiper gallery-thumbs" :options="swiperOptionThumbs" ref="swiperThumbs">
+      <swiper-slide v-for="(src, index) in imgSrcLsCom" :key="index">
+          <img :src="src">
+      </swiper-slide>
+    </swiper>
+  </div>
 </template>
 
 <script>
-export default {
-    data(){
-        return {
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
 
-        }
+  export default {
+    name: 'swiper-example-thumbs-gallery',
+    title: 'Thumbs gallery with Two-way control',
+    components: {
+      Swiper,
+      SwiperSlide
+    },
+    data() {
+      return {
+        swiperOptionTop: {
+          loop: true,
+          loopedSlides: 5, // looped slides should be the same
+          spaceBetween: 10,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        },
+        swiperOptionThumbs: {
+          loop: true,
+          loopedSlides: 5, // looped slides should be the same
+          spaceBetween: 10,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          touchRatio: 0.2,
+          slideToClickedSlide: true
+        },
+        imgSrcLs: []
+      }
     },
     created(){
-        console.log(this.$route.query.item)
+        console.log(this.$route.query)
+        if(this.$route.query.item){
+            this.imgSrcLs = this.$route.query.item.split(',')
+        }
+        if(this.$route.query.id){
+            this.getLeonardById(this.$route.query.id)
+        }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        const swiperTop = this.$refs.swiperTop.$swiper
+        const swiperThumbs = this.$refs.swiperThumbs.$swiper
+        swiperTop.controller.control = swiperThumbs
+        swiperThumbs.controller.control = swiperTop
+      })
     },
     methods:{
-
+        async getLeonardById(id){
+            console.log(id)
+            let {data: res} = await this.$http.get("/share/blogs/GetLeonardById", {params: {id: id}})
+            if(res.meta.status !== 200){ return this.$message.error("获取图册信息失败！"); }
+            this.imgSrcLs = res.data[0].files
+        }
+    },
+    computed:{
+        imgSrcLsCom(){
+            let src = []
+            for(let i = 0; i < this.imgSrcLs.length; i++){
+                src.push(this.$http.defaults.baseURL + this.imgSrcLs[i])
+            }
+            // console.log(src)
+            return src
+        }
     }
-}
+  }
 </script>
 
 <style lang="less" scoped>
+  .thumb-example {
+    height: 100vh;
+    background-color: black;
+  }
 
-    .slider {
-        width: 200px;
-        height: 200px;
-        margin: auto;
-        -webkit-perspective: 600px;
-                perspective: 600px;
+  .swiper {
+    .swiper-slide {
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      img{
+          height: 100%;
+      }
     }
 
-        .slider * {
-            -webkit-transition: all 1s cubic-bezier(0.5, -0.75, 0.2, 1.5);
-                    transition: all 1s cubic-bezier(0.5, -0.75, 0.2, 1.5);
-        }
-
-        .container {
-            width: inherit;
-            height: inherit;
-            -webkit-transform-style: preserve-3d;
-                    transform-style: preserve-3d;
-            -webkit-transform: rotateY(0deg) rotateX(0deg);
-                    transform: rotateY(0deg) rotateX(0deg);
-        }
-
-            .slide, .slide:after, .slide:before {
-                display: block;
-                width: inherit;
-                height: inherit;
-                background: url('../../../assets/01.png');
-                position: absolute;
-                -webkit-transform-style: preserve-3d;
-                        transform-style: preserve-3d;
-                background-size: cover;
-                background-position: center;
-            }
-
-            .slide.x {
-            -webkit-transform: rotateY(90deg);
-                    transform: rotateY(90deg);
-            } 
-
-                .slide.x:after {
-                    content: '';
-                    background-image: url('../../../assets/01.png');
-                    -webkit-transform: translateZ(100px) rotateZ(-90deg);
-                            transform: translateZ(100px) rotateZ(-90deg);
-                }
-
-                .slide.x:before {
-                    content: '';
-                    background-image: url('../../../assets/01.png');
-                    -webkit-transform: translateZ(-100px) rotateZ(-90deg);
-                            transform: translateZ(-100px) rotateZ(-90deg);
-                }
-
-            .slide.y {
-            -webkit-transform: rotateX(90deg);
-                    transform: rotateX(90deg);
-            } 
-
-                .slide.y:after {
-                    content: '';
-                    background-image: url('../../../assets/01.png');
-                    -webkit-transform: translateZ(100px) scale(-1);
-                            transform: translateZ(100px) scale(-1);
-                }
-
-                .slide.y:before {
-                    content: '';
-                    background-image: url('../../../assets/01.png');
-                    -webkit-transform: translateZ(-100px);
-                            transform: translateZ(-100px);
-                }
-
-            .slide.z {
-            -webkit-transform: rotateX(0);
-                    transform: rotateX(0);
-            } 
-
-                .slide.z:after {
-                    content: '';
-                    background-image: url('../../../assets/01.png');
-                    -webkit-transform: translateZ(100px);
-                            transform: translateZ(100px);
-                }
-
-                .slide.z:before {
-                    content: '';
-                    background-image: url('../../../assets/01.png');
-                    -webkit-transform: translateZ(-100px);
-                            transform: translateZ(-100px);
-                }
-
-
-            .container {
-                -webkit-animation: rotate 15s infinite cubic-bezier(1, -0.75, 0.5, 1.2);
-                animation: rotate 15s infinite cubic-bezier(1, -0.75, 0.5, 1.2);
-            }
-
-            @-webkit-keyframes rotate {
-                0%, 10% {-webkit-transform: rotateY(0deg) rotateX(0deg);transform: rotateY(0deg) rotateX(0deg);}
-                15%, 20% {-webkit-transform: rotateY(180deg) rotateX(0deg);transform: rotateY(180deg) rotateX(0deg);}
-                25%, 35% {-webkit-transform: rotateY(180deg) rotateX(270deg);transform: rotateY(180deg) rotateX(270deg);}
-                40%, 50% {-webkit-transform: rotateY(180deg) rotateX(90deg);transform: rotateY(180deg) rotateX(90deg);}
-                55%, 65% {-webkit-transform: rotateY(-90deg) rotateX(90deg);transform: rotateY(-90deg) rotateX(90deg);}
-                70%, 80% {-webkit-transform: rotateY(90deg) rotateX(90deg);transform: rotateY(90deg) rotateX(90deg);}
-                90%, 95% {-webkit-transform: rotateY(0deg) rotateX(90deg);transform: rotateY(0deg) rotateX(90deg);}
-            }
-
-            @keyframes rotate {
-                0%, 10% {-webkit-transform: rotateY(0deg) rotateX(0deg);transform: rotateY(0deg) rotateX(0deg);}
-                15%, 20% {-webkit-transform: rotateY(180deg) rotateX(0deg);transform: rotateY(180deg) rotateX(0deg);}
-                25%, 35% {-webkit-transform: rotateY(180deg) rotateX(270deg);transform: rotateY(180deg) rotateX(270deg);}
-                40%, 50% {-webkit-transform: rotateY(180deg) rotateX(90deg);transform: rotateY(180deg) rotateX(90deg);}
-                55%, 65% {-webkit-transform: rotateY(-90deg) rotateX(90deg);transform: rotateY(-90deg) rotateX(90deg);}
-                70%, 80% {-webkit-transform: rotateY(90deg) rotateX(90deg);transform: rotateY(90deg) rotateX(90deg);}
-                90%, 95% {-webkit-transform: rotateY(0deg) rotateX(90deg);transform: rotateY(0deg) rotateX(90deg);}
-            }
-
-
-    .shadow {
-        display: block;
-        width: 200px;
-        height: 200px;
-        background: rgba(0,0,0,0.75);
-        position: absolute;
-        top: 60%;
-        -webkit-transform: rotateX(90deg);
-                transform: rotateX(90deg);
-        z-index: -1;
-        -webkit-filter: blur(20px);
-        -webkit-filter: blur(20px);
-                filter: blur(20px);
-        left: 0;
-        right: 0;
-        margin: auto;
-        -webkit-animation: rotateShadow 15s infinite cubic-bezier(1, -0.75, 0.5, 1.2);
-        animation: rotateShadow 15s infinite cubic-bezier(1, -0.75, 0.5, 1.2);
+    &.gallery-top {
+      height: 80%;
+      width: 100%;
     }
-
-        @keyframes rotateShadow {
-            0%, 10% {-webkit-transform: rotateY(0deg) rotateX(90deg);}	
-            15%, 20% {-webkit-transform: rotateY(180deg) rotateX(90deg);;}
-            20.1%, 20.9% {-webkit-transform: rotateY(180deg) rotateX(90deg) translatez(5px);}
-            25%, 35% {-webkit-transform: rotateY(180deg) rotateX(90deg);}
-            35.1%, 35.9% {-webkit-transform: rotateY(180deg) rotateX(90deg) translatez(-5px);}
-            40%, 50% {-webkit-transform: rotateY(180deg) rotateX(90deg);}
-            55%, 65% {-webkit-transform: rotateY(0deg) rotateX(90deg);}
-            70%, 80% {-webkit-transform: rotateY(180deg) rotateX(90deg);}
-            90%, 99% {-webkit-transform: rotateY(90deg) rotateX(90deg);}
-            99.1%, 99.9% {-webkit-transform: rotateY(90deg) rotateX(90deg) translatez(-5px);}
-        }
+    &.gallery-thumbs {
+      height: 20%;
+      box-sizing: border-box;
+      padding: gap 0;
+    }
+    &.gallery-thumbs .swiper-slide {
+      width: 25%;
+      height: 100%;
+      opacity: 0.4;
+    }
+    &.gallery-thumbs .swiper-slide-active {
+      opacity: 1;
+    }
+  }
 </style>

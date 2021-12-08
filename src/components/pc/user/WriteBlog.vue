@@ -13,17 +13,6 @@
             <input type="text" @blur="onblur" @keyup.enter="enter" placeholder="请输入标题" v-model="formData.inputTitle" ref="inputRef">
             <p>{{tip}}</p>
         </div>
-        <!-- 内容输入 -->
-        <!-- 文本编辑器 -->
-        <!-- <div class="content">
-            <quill-editor
-                v-model="content"
-                ref="myQuillEditor"
-                :options="editorOption"
-                @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-                @change="onEditorChange($event)">
-            </quill-editor>
-        </div> -->
 
         <div class="content">
             <mavon-editor 
@@ -58,8 +47,6 @@
                 </el-select>
             </template>
         </div>
-
-
 
 
         <div class="subButton">

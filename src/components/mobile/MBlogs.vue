@@ -125,9 +125,11 @@ export default {
             // 分类标签的获取
             this.classifyGet()
         },
+
         // 上划所有博客的请求,直接拼接
         async pageBlogsGetNext(){
             let {data: res} = await this.$http.get("/share/blogs/allBlogs", {params: {currentPage: this.currentPage}})
+            // console.log(res)
             if(res.meta.status !== 200){ return this.$message.error("获取博客数据失败！") }
             this.dataList = this.dataList.concat(res.data.slice(0, res.data.length-1))
             // console.log(this.dataList.length)
@@ -155,6 +157,7 @@ export default {
             this.dataList = res.data
             // console.log(this.dataList.length)
         },
+
         // 上划分类的请求,直接拼接
         async classifyGetNext(){
             let {data: res} = await this.$http.get("/share/classifyBlogGetM", { params: { value: this.name, classifyPage: this.classifyPage }})
@@ -189,7 +192,6 @@ export default {
                     this.classifyPage = this.classifyPage + 1
                     this.classifyGetNext()
                 }
-                
             }
         }
     },

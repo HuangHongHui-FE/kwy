@@ -2,11 +2,8 @@
 
 <template>
 	<div class="totalDiv" ref="ulRef">
-		
-
 		<!-- 上方的图册区域 -->
 		<div class="topDiv">
-			
 			<div class="content">
 				<a class="card">
 					<div class="front" :style="'background-image:url('+ img07 +');'">
@@ -143,59 +140,6 @@
 					</div>
 				</a>
 			</div>
-
-
-
-			<!-- <div>
-				<div @click="defindShow">
-					<img :src="img01" alt="">
-					<div class="topTitle">伦纳德防守集锦</div>
-				</div>
-				<div @click="schoolShow">
-					<img :src="img02" alt="">
-					<div class="topTitle">高中与大学时期</div>
-				</div>
-				<div @click="youngerShow">
-					<img :src="img03" alt="">
-					<div class="topTitle">幼年伦纳德</div>
-				</div>
-				<div @click="koulanShow">
-					<img :src="img04" alt="">
-					<div class="topTitle">伦纳德扣篮</div>
-				</div>
-				<div @click="kcsqShow">
-					<img :src="img05" alt="">
-					<div class="topTitle">快船时期</div>
-				</div>
-				<div @click="sevenShow">
-					<img :src="img06" alt="">
-					<div class="topTitle">抢七绝杀</div>
-				</div>
-				<div @click="mlsqShow">
-					<img :src="img07" alt="">
-					<div class="topTitle">猛龙时期</div>
-				</div>
-				<div @click="mcsqShow">
-					<img :src="img08" alt="">
-					<div class="topTitle">马刺时期</div>
-				</div>
-				<div @click="mvpShow">
-					<img :src="img09" alt="">
-					<div class="topTitle">NBA总冠军、FMVP</div>
-				</div>
-				<div @click="newShow">
-					<img :src="img10" alt="">
-					<div class="topTitle">马刺新秀</div>
-				</div>
-				<div @click="ctimageShow">
-					<img :src="img11" alt="">
-					<div class="topTitle">词条图片</div>
-				</div>
-				<div @click="gsimageShow">
-					<img :src="img12" alt="">
-					<div class="topTitle">概述图册</div>
-				</div>
-			</div> -->
 		</div>
 
 		<!-- 搜索框 -->
@@ -206,15 +150,22 @@
 		</div>
 
 		<!-- 图片区域 -->
-		<div class="bottomImg">
+		<!-- <keep-alive> -->
+		<div class="bottomImg">	
 			<ul>
 				<li v-for="(item, index) in srcList" :key="index" v-on:mouseover="changeActive($event)" v-on:mouseout="removeActive($event)">
 					<p :style="flag == index ? 'display: block': ''">{{item.title}}</p>
-					<img :src="$http.defaults.baseURL + 'public/image/' + item.src" alt="">
+					<!-- 图片懒加载 -->
+					<img v-lazy="$http.defaults.baseURL + 'public/image/' + item.src" alt="">
+					<!-- <img :src="$http.defaults.baseURL + 'public/image/' + item.src" alt=""> -->
 				</li>
+				
 			</ul>
+			
 		</div>
-		<img :src="img13" v-if="srcList.length === 0? true: false" class="kongImg">
+		<!-- </keep-alive> -->
+		<img v-lazy="img13" v-if="srcList.length === 0? true: false" class="kongImg">
+		<!-- <img :src="img13" v-if="srcList.length === 0? true: false" class="kongImg"> -->
 	</div>
 </template>
 
@@ -351,8 +302,6 @@
 	.totalDiv{
 		overflow-x: hidden;
 		.topDiv{
-
-
 			*, *:before, *:after {
 				box-sizing: border-box;
 			}
@@ -404,13 +353,13 @@
 			}
 
 			.front {
-			background-size: cover;
-			padding: 2rem;
-			font-size: 1.618rem;
-			font-weight: 600;
-			color: #fff;
-			overflow: hidden;
-			font-family: Poppins, sans-serif;
+				background-size: cover;
+				padding: 2rem;
+				font-size: 1.618rem;
+				font-weight: 600;
+				color: #fff;
+				overflow: hidden;
+				font-family: Poppins, sans-serif;
 			}
 			.front:before {
 				position: absolute;
@@ -447,8 +396,7 @@
 			}
 
 			.button {
-				transform: translateZ(40px);
-				cursor: pointer;
+				// transform: translateZ(40px);
 				-webkit-backface-visibility: hidden;
 				backface-visibility: hidden;
 				font-weight: bold;
@@ -456,45 +404,12 @@
 				padding: .5em 1em;
 				border-radius: 100px;
 				font: inherit;
-				background: linear-gradient(135deg, #1a9be6, #1a57e6);
+				background: linear-gradient(135deg, #57addf, #6087e2);
 				border: none;
 				position: relative;
 				transform-style: preserve-3d;
 				transition: 300ms ease;
 			}
-			.button:before {
-				transition: 300ms ease;
-				position: absolute;
-				display: block;
-				content: '';
-				transform: translateZ(-40px);
-				-webkit-backface-visibility: hidden;
-				backface-visibility: hidden;
-				height: calc(100% - 20px);
-				width: calc(100% - 20px);
-				border-radius: 100px;
-				left: 10px;
-				top: 16px;
-				box-shadow: 0 0 10px 10px rgba(26, 87, 230, 0.25);
-				background-color: rgba(26, 87, 230, 0.25);
-			}
-			.button:hover {
-				transform: translateZ(55px);
-			}
-			.button:hover:before {
-				transform: translateZ(-55px);
-			}
-			.button:active {
-				transform: translateZ(20px);
-			}
-			.button:active:before {
-				transform: translateZ(-20px);
-				top: 12px;
-			}
-
-
-
-
 
 
 			&>div{

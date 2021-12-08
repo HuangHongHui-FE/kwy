@@ -108,9 +108,9 @@ export default {
         async login(){
             let {data: res} = await this.$http.post('/login', {username: this.username, pwd: this.password})
             console.log(res)
-            window.sessionStorage.setItem("username", this.username)
-            window.sessionStorage.setItem("pwd", this.password)
-            window.sessionStorage.setItem("image", "data:image/png;base64," + res.data)
+            window.sessionStorage.setItem("username", res.data[0].username)
+            window.sessionStorage.setItem("pwd", res.data[0].pwd)
+            window.sessionStorage.setItem("image", "data:image/png;base64," + res.data[0].img)
             this.getUserMsg()
             this.isLogin = true
             
@@ -122,7 +122,7 @@ export default {
             }
             if(this.password.length > 5 && this.password.length < 16){
                 let {data: res} = await this.$http.get('/touXiangGet', {params: { username: this.username, pwd: this.password }})
-                if(res.meta.status !== 200){ 
+                if(res.meta.status !== 200){
                     this.img01 = this.imgError
                     return
                 }

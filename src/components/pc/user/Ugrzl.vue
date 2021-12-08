@@ -169,6 +169,10 @@
            	changeProduct3() {
 				this.city33 = this.city3.value
            	},
+			post_grzl_cli() {
+				console.log(this.debounce)
+				this.debounce(this.post_grzl, 1000)
+			},
            	async post_grzl(){
            		this.formGet.address.city1 = this.city1
            		this.formGet.address.city11 = this.city11
@@ -181,6 +185,26 @@
            		this.$message.success("信息更新成功！")
            		this.getUserMsg()
            	},
+
+			debounce(callback, time){
+				//定时器变量
+				let timeId = null;
+				//返回一个函数
+				return function(){
+					//判断
+					if(timeId !== null){
+						//清空定时器
+						clearTimeout(timeId);
+					}
+					//启动定时器
+					timeId = setTimeout(() => {
+						//执行回调
+						callback.call();
+						//重置定时器变量
+						timeId = null;
+					}, time);
+				}
+			},
            	upload(){
            		this.$el.querySelector('.touInput').click()
            	},
@@ -197,9 +221,7 @@
 				//将文件以Data URL形式读入页面
            		reader.readAsDataURL(file)
 
-				
            		this.dialogVisible = true
-				
            	},
            	// 头像放大
            	imgFaDa(){

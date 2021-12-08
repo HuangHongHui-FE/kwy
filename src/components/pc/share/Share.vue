@@ -12,10 +12,10 @@
 					class="inline-input"
 					v-model="inputBlog"
 					:fetch-suggestions="querySearchBlogs"
-					:placeholder="placeholder"
+					:placeholder="placeholderBlogs"
 					:trigger-on-focus="false"
 					@select="handleSelectBlogs"
-					@focus.once="getDiseaseMainSettingBlogs"
+					@focus="getDiseaseMainSettingBlogs"
 				>
 				</el-autocomplete>
 			</div>
@@ -26,7 +26,7 @@
 					class="inline-input"
 					v-model="inputLeonard"
 					:fetch-suggestions="querySearchLeonard"
-					:placeholder="placeholder"
+					:placeholder="placeholderLeonard"
 					:trigger-on-focus="false"
 					@select="handleSelectLeonard"
 					@focus="getDiseaseMainSettingLeonard"
@@ -49,7 +49,8 @@
 				blogsList: [], 
 				//这个值是用户正在输入的值
           		inputBlog: '',
-				placeholder: '请输入要找的博客',
+				placeholderBlogs: '请输入要找的博客',
+				placeholderLeonard: '请输入要找的图册',
 				inputLeonard: '',
 				leonardList: []
 			}
@@ -62,16 +63,15 @@
         },
 		methods:{
 			async getDiseaseMainSettingBlogs(){
-				if(this.blogsList.length===0){
-					var {data:res} = await this.$http.get("/share/blogs/inputTitleGet")
-					if(res.meta.status === 200){
-						res.data.forEach(item => {
-							this.blogsList.push({
-								id: item._id,
-								value: item.inputTitle
-							})
+				// if(this.blogsList.length===0){
+				var {data:res} = await this.$http.get("/share/blogs/inputTitleGet")
+				if(res.meta.status === 200){
+					res.data.forEach(item => {
+						this.blogsList.push({
+							id: item._id,
+							value: item.inputTitle
 						})
-					}
+					})
 				}
 				
 				
@@ -94,9 +94,9 @@
 				}
 			},
 			/* 用户选择了然后根据item.id查到博客 */
-			async handleSelectBlogs (item) {
+			handleSelectBlogs (item) {
 				// 点一下就增加一次阅读数
-				await this.$http.post("/user/updateView", {_id: item.id})
+				this.$http.post("/user/updateView", {_id: item.id})
 				this.inputBlog = ''
 				const obj = this.$router.resolve({
 					name: `/blogContent?_id=${item.id}`
@@ -115,8 +115,10 @@
 								id: item._id,
 								value: item.inputTitle
 							})
+							
 						})
 					}
+					console.log(this.leonardList)
 				}
 				
 				
@@ -138,11 +140,11 @@
 					)
 				}
 			},
-			/* 用户选择了然后根据item.id查到博客 */
+			/* 用户选择了然后根据查到图册 */
 			async handleSelectLeonard (item) {
 				console.log(item)
 				const obj = this.$router.resolve({
-					name: `/leonardShow?item=${item.files}`
+					name: `/leonardShow?id=${item.id}`
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -150,19 +152,20 @@
 			switchTo(path){
 				this.$router.replace(path)
 			}
-		},
-		watch:{
-			'$route.path': function(){
-				if(this.$route.path === '/share/blogs'){ 
-					this.placeholder = "请输入要找的博客" 
-					this.inputLeonard = ''
-				}
-				if(this.$route.path === '/share/leonard'){
-					this.placeholder = "请输入要找的图册"
-					this.inputBlog = ''
-				}
-			}
 		}
+		// watch:{
+		// 	'$route.path': function(){
+		// 		console.log(this.$route.path)
+		// 		if(this.$route.path === '/share/blogs'){ 
+		// 			this.placeholder = "请输入要找的博客" 
+		// 			this.inputLeonard = ''
+		// 		}
+		// 		if(this.$route.path === '/share/leonard'){
+		// 			this.placeholder = "请输入要找的图册"
+		// 			this.inputBlog = ''
+		// 		}
+		// 	}
+		// }
 		
 	}
 </script>

@@ -211,6 +211,7 @@ export default {
 					this.loginForm.sureCode = ''
 					return this.$message.error("请输入正确的验证码!");
 				} 
+
 				const {data: res} = await this.$http.post("login", this.loginForm);
 
 				console.log("login", res)
@@ -221,10 +222,13 @@ export default {
 					return this.$message.error("登录失败,请检查账号或密码输入是否有误！");
 				}
 				this.$message.success("登陆成功");
-				// 设置token
-				window.sessionStorage.setItem('username', this.loginForm.username);
-				window.sessionStorage.setItem('pwd', this.loginForm.pwd);	
-				window.sessionStorage.setItem('image', 'data:image/jpeg;base64,' + res.data);	
+				
+				// 加密的用户名密码存起来
+				window.sessionStorage.setItem('username', res.data[0].username);
+				// window.sessionStorage.setItem('pwd', this.loginForm.pwd);
+				// window.localStorage.setItem('username', res.data[0].username);
+				window.sessionStorage.setItem('pwd', res.data[0].pwd);
+				window.sessionStorage.setItem('image', 'data:image/jpeg;base64,' + res.data[0].img);	
 				this.$router.replace("/");
 			})
 		},

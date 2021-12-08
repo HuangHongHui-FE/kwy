@@ -1,9 +1,12 @@
 <template>
-	<div class="maxDiv">
+	<div class="maxDiv" id="top">
 		<!-- 全屏的div -->
 		<div class="top">
 			<!-- 准备放一张图片追冠军 -->
-			科怀一直都很坚强，他是个好孩子，他想要变得越来越出色。
+			<!-- 科怀一直都很坚强，他是个好孩子，他想要变得越来越出色。 -->
+			<!-- <iframe :src="getRunHouseUrl" width="100%" height="300px" frameborder="0" scrolling="auto" style="position:absolute;top: -300px;left: 0px;"></iframe> -->
+			<!-- <iframe :src="getRunHouseUrl" scrolling="no" width="100%" height="500px" -->
+      		<!-- ></iframe> -->
 		</div>
 		
 		<div class="bottom">
@@ -475,6 +478,7 @@
 					</div>
 				</div>
 
+				<!-- 自定义栏目 -->
 				<div class="rightTitle" v-if="showDt">
 					<dl>
 						<dt>
@@ -507,6 +511,18 @@
 						</dt>
 					</dl>
 				</div>
+				<!-- 返回顶部以及小程序 -->
+				<div class="toTop_xiao" v-if="showDt">
+					<!-- 小程序 -->
+					<!-- <div>
+						<i class="el-icon-user"></i>
+					</div> -->
+					<!-- 返回顶部 -->
+					<a v-on:mouseover="changeActive($event)" v-on:mouseout="removeActive($event)" href="#top">
+						<i class="el-icon-user" v-if="topMask"></i>
+						<span v-else>返回顶部</span>
+					</a>
+				</div>
 			</div>
 		</div>
 
@@ -529,7 +545,6 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-
 
 	export default{
 		components: {
@@ -584,7 +599,10 @@ import 'swiper/css/swiper.css'
 				flag: 0,
 				showDt: false,
 				centerDialogVisible: false,
-				dialogImg: require("../../../assets/grzl/总决赛大战热火.png")
+				dialogImg: require("../../../assets/grzl/总决赛大战热火.png"),
+				topMask: true,
+				// 内嵌页面的路径
+				getRunHouseUrl: '../../../static/runHouse/runHouse.html'
 			}
 		},
 		
@@ -594,11 +612,6 @@ import 'swiper/css/swiper.css'
 			this.$refs.divRef.addEventListener('mouseover', this.imgOver, true)
 			this.$refs.divRef.addEventListener('mouseout', this.imgOut, true)
 			this.$refs.divRef.addEventListener('mousemove', this.imgMove, true)
-			
-
-
-			// console.log('Current Swiper instance object', this.mySwiper)
-      		// this.mySwiper.slideTo(3, 1000, false)
 		},
 		created(){
 			this.banners = [this.img26, this.img27, this.img28]
@@ -812,6 +825,13 @@ import 'swiper/css/swiper.css'
 				}
 				this.$refs.smallRef.style.top = maskY + 'px';
 				this.$refs.bigImgRef.style.top = -maskY * 3 + 'px';
+			},
+			// 返回顶部的移入事件
+			changeActive(e){
+				this.topMask = false
+			},
+			removeActive(e){
+				this.topMask = true
 			}
 
 		}
@@ -829,7 +849,7 @@ import 'swiper/css/swiper.css'
 	}
 		.top{
 			width: 100%;
-			height: 270px;
+			height: 20px;
 		}
 		.bottom{
 			width: 75%;
@@ -1019,6 +1039,44 @@ import 'swiper/css/swiper.css'
 						border-radius: 0 50% 50% 0;
 						background-color: red;
 					}
+				}
+			}
+			.toTop_xiao{
+				// background-color: #00ff33;
+				position: fixed;
+				width: 60px;
+				height: 120px;
+				top: 80%;
+				right: 10%;
+				a, div{
+					text-decoration: none;
+					display: block;
+					height: 60px;
+					width: 60px;
+					border-radius: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: rgb(255, 255, 255);
+					color: rgb(150, 153, 162);
+					i{
+						font-size: 30px;
+					}
+					span{
+						width: 40px;
+						height: 40px;
+						font-size: 15px;
+						display: flex;
+						flex-wrap: wrap;
+						text-align: center;
+						line-height: 20px;
+					}
+
+					
+				}
+				div:nth-child(1){
+					// background-color: #ff6600;
+					margin-bottom: 10px;
 				}
 			}
 		}

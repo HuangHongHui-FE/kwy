@@ -87,6 +87,7 @@ export default{
     },
     methods:{
         async selfBlogGet(){
+            
             let username = window.sessionStorage.getItem("username")
             let {data: res} = await this.$http.get("/user/selfBlogGet", {params: {username: username, currentPage: this.currentPage - 1}})
             console.log(res.data)

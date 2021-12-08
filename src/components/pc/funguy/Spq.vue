@@ -28,8 +28,6 @@
 					</div>
 				</div>
 			</div>
-			
-			
 		</div>
 	</div>
 	
@@ -61,7 +59,6 @@
 			},
 			// 点击右侧的列表视频
 			playVideo(item){
-				console.log(item)
 				this.videoSrc = item.path
 				this.videoData = item
 			}

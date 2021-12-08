@@ -7,19 +7,15 @@ import './plugins/element.js'
 import './assets/css/font.css'
 import './assets/css/global.css'
 import store from './store.js'
-// markdown编辑器
-// import VueQuillEditor from 'vue-quill-editor'
- 
-// require styles
-// import 'quill/dist/quill.core.css'
-// import 'quill/dist/quill.snow.css'
-// import 'quill/dist/quill.bubble.css'
-
-
 
 import axios from 'axios'
 
+// 图片懒加载插件
+import VueLazyload from 'vue-lazyload'
+import loading from './assets/loading.png'
+
 axios.defaults.baseURL = "http://127.0.0.1:3000/"
+// axios.defaults.baseURL = "http://192.168.174.128:8890/"
 axios.defaults.withCredentials = true
 
 Vue.prototype.$http = axios
@@ -29,9 +25,7 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 
-// Vue.use(VueQuillEditor)
 
-// 全局的过滤器, originVal传过来的时间
 Vue.filter('dateFormat', function(originVal) {
 	const dt = new Date(originVal)
 
@@ -45,14 +39,19 @@ Vue.filter('dateFormat', function(originVal) {
 	return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
 })
 
+
 Vue.filter('kong', function(originVal) {
 	if(originVal === ''){
 		return '未分类'
 	}else{
 		return originVal
 	}
-	
 })
+
+Vue.use(VueLazyload, {
+	loading
+})
+
 
 
 new Vue({

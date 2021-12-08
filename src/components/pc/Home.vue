@@ -8,7 +8,7 @@
 					<a>funguy</a>
 				</div>
 				<div :class="$route.path === '/study'?'on': ''" @click="switchTo('/study')">
-					<a>study</a>
+					<a>resource</a>
 				</div>
 				<div :class="$route.path.split('/')[1] === 'share'?'on': ''" @click="switchTo('/share')">
 					<a>share</a>
@@ -17,7 +17,6 @@
 				<span :class="$route.path.split('/')[1] === 'user'? 'on_img': ''">
 					<img alt="头像" title="ha" :src="imgSrc" @click="imgSelect()"/>
 				</span>
-				
 			</div>
 
 
@@ -88,7 +87,7 @@
 				// 标记显示与隐藏
 				showUser: false,
 				isLogin: false,
-				nicheng: "",
+				// nicheng: "",
 				// data: {},
 				queryInfo: {},
 				imgSrc: require('./kongbai.png'),
@@ -125,7 +124,7 @@
 				this.bgcM = window.sessionStorage.getItem("bgcM")
 			}
 
-			if(username !== null){
+			if(username !== null && pwd!==null){
 				this.isLogin = true;
 				if(!window.sessionStorage.getItem("image")){
 					this.getTouXiangImg()
@@ -281,15 +280,6 @@
 
 <style lang="less" scoped>
 
-/* 移动端  */
-@media only screen and (max-width: 1099px) {
-	// 将pc端的毙了
-	
-}
-
-// /* PC端 */
-// @media only screen and (min-width: 1100px) {
-	// 将移动端的毙了
 	.mobileMaxDiv{
 		display: none;
 	}

@@ -11,7 +11,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <div class="box">
                         <img :src="img01">
                         <div class="box-content">
@@ -19,7 +19,7 @@
                             <span class="post">前端开发</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -29,14 +29,13 @@
 export default {
     data(){
         return {
-            img01: require('../../../assets/01.png'),
+            // img01: require('../../../assets/01.png'),
             leonardData: [],
             page: 0
         }
     },
     created(){
         this.getLeonard()
-        
     },
     mounted(){
         // 添加窗口滚动事件
@@ -51,9 +50,10 @@ export default {
             console.log(res)
             if(res.meta.status!==200){ return this.$message.warning("没有更多数据！"); }
             this.leonardData = this.leonardData.concat(res.data)
+            console.log(this.leonardData)
         },
         goLeonardShow(item){
-            console.log(item)
+            // console.log(item)
             const obj = this.$router.resolve({
                 name: `/leonardShow?item=${item.files}`
             });
@@ -69,7 +69,6 @@ export default {
             if(clientLen - scrollLen >= scrollTotalLen - 1){
                 this.page = this.page + 1
                 this.getLeonard()
-                
             }
         }
     }
@@ -78,9 +77,6 @@ export default {
 
 
 <style lang="less" scoped>
-
-
-
     .container{
         width: 80%;
         position: relative;
