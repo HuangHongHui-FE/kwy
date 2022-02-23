@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../components/pc/Home.vue'
-import Funguy from '../components/pc/funguy/Funguy.vue'
-import Study from '../components/pc/study/Study.vue'
-import Share from '../components/pc/share/Share.vue'
-import User from '../components/pc/user/User.vue'
+import Funguy from '../views/pc/Funguy.vue'
+import Study from '../views/pc/Study.vue'
+import Share from '../views/pc/Share.vue'
+import User from '../views/pc/User.vue'
 import Grzl from '../components/pc/funguy/Grzl.vue'
 import Tpq from '../components/pc/funguy/Tpq.vue'
 import Spq from '../components/pc/funguy/Spq.vue'
@@ -15,7 +15,7 @@ import SeeSelfBlog from '../components/pc/user/SeeSelfBlog.vue'
 import UploadPhoto from '../components/pc/user/UploadPhoto.vue'
 
 
-import Login from '../components/pc/Login.vue'
+import Login from '../views/pc/Login.vue'
 // 图片展示
 import Show from '../components/pc/Show.vue'
 // 博客详情页
@@ -31,7 +31,7 @@ import Socket from '../components/pc/study/Socket.vue'
 
 
 // 移动端主页
-import MIndex from '../components/mobile/MIndex.vue'
+import MIndex from '../views/mobile/MIndex.vue'
 
 import MVideo from '../components/mobile/MVideo'
 // import MImage from '../components/mobile/MImage'
@@ -107,17 +107,17 @@ const routesM = [
     redirect: 'mIndex/video',
     children: [
       {
-        path: '/mIndex/video',
+        path: 'video',
         component: MVideo,
         name: 'video'
       },
       {
-        path: '/mIndex/blogs',
+        path: 'blogs',
         component: MBlogs,
         name: 'blogs'
       },
       {
-        path: '/mIndex/users',
+        path: 'users',
         component: MUsers,
         name: 'users'
       }
@@ -136,7 +136,8 @@ if (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
 
 const router = new VueRouter({
   // 去除地址栏的 #
-  mode: "history",
+  // mode: "history",
+  mode: "hash",
   routes
 })
 

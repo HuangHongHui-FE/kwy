@@ -28,11 +28,11 @@
 						<img :src="imgSrc" alt="吼吼吼" title="头像">
 					</div>
 					<div @click="goWriteBlog">
-						<i class="iconfont icon-nicheng"></i>
+						<i class="iconfont icon-boke"></i>
 						<label>写博客</label>
 					</div>
 					<div @click="goUgrzl()">
-						<i class="iconfont icon-ziyuan-copy"></i>
+						<i class="iconfont icon-gerenziliao"></i>
 						<a>个人信息</a>
 					</div>
 					<template>
@@ -42,7 +42,7 @@
 				<!-- 没有登录 -->
 				<div v-if="!isLogin" class="notLogin">
 					<div>
-						<img src="./kongbai.png" alt="吼吼吼" title="头像">
+						<img src="../../static/img/kongbai.png" alt="吼吼吼" title="头像">
 					</div>
 					<el-button type="primary" size="mini" @click="goLogin()">去登录</el-button>
 				</div>
@@ -90,10 +90,10 @@
 				// nicheng: "",
 				// data: {},
 				queryInfo: {},
-				imgSrc: require('./kongbai.png'),
-				bgi01: require('./kongbai.png'),
-				bgi02: require('./3072_1728.jpeg'),
-				bgi03: require('./03.jpeg'),
+				imgSrc: require('../../static/img/kongbai.png'),
+				bgi01: require('../../static/img/kongbai.png'),
+				bgi02: require('../../static/img/3072_1728.jpeg'),
+				bgi03: require('../../static/img/03.jpeg'),
 				bgcM: 0,
 				// 播放器的播放与暂停标识
 				playFlag: true,

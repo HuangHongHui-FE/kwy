@@ -5,6 +5,7 @@ import router from './router'
 import './plugins/element.js'
 
 import './assets/css/font.css'
+// import './assets/fonts/demo.css'
 import './assets/css/global.css'
 import store from './store.js'
 
@@ -12,14 +13,18 @@ import axios from 'axios'
 
 // 图片懒加载插件
 import VueLazyload from 'vue-lazyload'
-import loading from './assets/loading.png'
+import loading from './static/img/loading.png'
 
 axios.defaults.baseURL = "http://127.0.0.1:3000/"
+// axios.defaults.baseURL = "http://82.157.53.221:3000/"
 // axios.defaults.baseURL = "http://192.168.174.128:8890/"
 axios.defaults.withCredentials = true
 
 Vue.prototype.$http = axios
 
+// 移动端的
+// import FastClick from 'fastclick'; // 引入插件
+// FastClick.attach(document.body); // 使用 fastclick
 
 
 Vue.config.productionTip = false

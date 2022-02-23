@@ -52,7 +52,7 @@
 						<span>个人简介</span>
 						<textarea v-model="formGet.grjj" class="textarea"></textarea>
 					</div>
-					<input value="提交修改" type="button" class="submit" @click="post_grzl()">
+					<input value="提交修改" type="button" class="submit" @click="post_grzl_cli">
 				</form>
 			</div>
 		</div>
@@ -119,9 +119,11 @@
 				// 选择头像预览的src
 				imgSrcPre: "",
 				dialogVisible: false,
-				dialogImgSrc: require("../touxiang.jpg"),
+				dialogImgSrc: require("../../../static/img/touxiang.jpg"),
 				touXiangDialogVisible: false,
-				file: ""
+				file: "",
+
+				timeId: null
 			}
 		},
 		created(){
@@ -147,7 +149,7 @@
 					
 				// 	withCredentials: true
 				// })
-				console.log(res.data)
+				// console.log(res.data)
 				if(res.meta.status!==200){ return this.$message.error("获取用户信息失败") }
 				this.formGet = res.data
 				this.city1 = res.data.address.city1
@@ -169,9 +171,16 @@
            	changeProduct3() {
 				this.city33 = this.city3.value
            	},
+			//  点击修改信息
 			post_grzl_cli() {
-				console.log(this.debounce)
-				this.debounce(this.post_grzl, 1000)
+				// 闭包节流
+				if(!this.timeId){ 
+					this.post_grzl()
+					this.timeId = setTimeout(() => {
+						clearTimeout(this.timeId)
+						this.timeId = null
+					}, 1000)
+				}
 			},
            	async post_grzl(){
            		this.formGet.address.city1 = this.city1
@@ -180,31 +189,12 @@
            		this.formGet.address.city22 = this.city22
            		this.formGet.address.city3 = this.city3
            		this.formGet.address.city33 = this.city33
-           		var {data: res} = await this.$http.post('/user/grzl', this.formGet)
-           		if(res.meta.status !== 200){ return this.$message.error("信息更新失败！") }
-           		this.$message.success("信息更新成功！")
-           		this.getUserMsg()
+				
+				var {data: res} = await this.$http.post('/user/grzl', this.formGet)
+				if(res.meta.status !== 200){ return this.$message.error("信息更新失败！") }
+				this.$message.success("信息更新成功！")
+				this.getUserMsg()
            	},
-
-			debounce(callback, time){
-				//定时器变量
-				let timeId = null;
-				//返回一个函数
-				return function(){
-					//判断
-					if(timeId !== null){
-						//清空定时器
-						clearTimeout(timeId);
-					}
-					//启动定时器
-					timeId = setTimeout(() => {
-						//执行回调
-						callback.call();
-						//重置定时器变量
-						timeId = null;
-					}, time);
-				}
-			},
            	upload(){
            		this.$el.querySelector('.touInput').click()
            	},

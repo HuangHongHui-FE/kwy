@@ -69,7 +69,7 @@
                         v-model="commentInput"
                     >
                     <template #append>
-                        <el-button icon="el-icon-search" @click="commentSub">发表评论</el-button>
+                        <el-button icon="el-icon-s-promotion" @click="commentSub">发表评论</el-button>
                     </template>
                     </el-input>
                 </div>
@@ -91,7 +91,7 @@ export default {
             blogCon: [],
             nicheng: '',
             blogList: [],
-            imgKong: require("../../assets/blogLogo.png"),
+            imgKong: require("../../static/img/blogLogo.png"),
             commentInput: ''
         }
     },

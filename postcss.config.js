@@ -11,7 +11,7 @@ module.exports = {
             mediaQuery: false,     // 允许在媒体查询中转换`px`
             // mediaQuery: true, // 是否在媒体查询的css代码中也进行转换，默认false
             replace: true, // 是否转换后直接更换属性值
-            exclude: [/node_modules/, /src\\components\\pc/, /src\\assets/] // 设置忽略文件，用正则做目录名匹配
+            exclude: [/node_modules/, /src\\components\\pc/, /src\\assets/, /src\\views\\pc/] // 设置忽略文件，用正则做目录名匹配
         }
     }
 }

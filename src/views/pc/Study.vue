@@ -111,7 +111,7 @@ import 'swiper/css/swiper.css'
 						prevEl: '.swiper-button-prev'
 					}
 				},
-				img01: require("../../../assets/touxiang.jpg"),
+				img01: require("../../static/img/touxiang.jpg"),
 
 				dataList: [],
 				id: '',

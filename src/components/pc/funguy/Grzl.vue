@@ -86,7 +86,7 @@
 					<div ref="zero">
 						<div class="item1">
 						<span id="zero">
-							<i class="el-icon-user"></i>
+							<i class="iconfont icon-jingli"></i>
 							<em>早年经历</em>
 						</span>
 						</div>
@@ -109,7 +109,7 @@
 					<!-- NBA生涯 -->
 					<div class="item2" ref="one">
 						<span id="one">
-							<i class="el-icon-user"></i>
+							<i class="iconfont icon-shengyaguihua-"></i>
 							<em>NBA生涯</em>
 						</span>
 					</div>
@@ -387,7 +387,7 @@
 					<div ref="five">
 						<div class="item3">
 							<span id="five" ref="five">
-								<i class="el-icon-user"></i>
+								<i class="iconfont icon-shuju"></i>
 								<em>NBA数据</em>
 							</span>
 						</div>
@@ -439,7 +439,7 @@
 					<div ref="six">
 						<div class="item4">
 							<span id="six">
-								<i class="el-icon-user"></i>
+								<i class="iconfont icon-huojiangqingkuang--"></i>
 								<em>获奖记录</em>
 							</span>
 						</div>
@@ -564,34 +564,34 @@ import 'swiper/css/swiper.css'
 				// ...
 				},
 				banners: [],
-				img01: require("../../../assets/tpqTop/0高中与大学时期.png"),
-				img02: require("../../../assets/tpqTop/01伦纳德的概述图.png"),
-				img03: require("../../../assets/tpqTop/13-马刺新秀.png"),
-				img04: require("../../../assets/tpqTop/25-2013-14赛季NBA总冠军、FMVP.png"),
-				img05: require("../../../assets/tpqTop/80-伦纳德防守集锦.png"),
-				img06: require("../../../assets/tpqTop/40-马刺时期.png"),
-				img07: require("../../../assets/tpqTop/52-猛龙时期.png"),
-				img08: require("../../../assets/tpqTop/62-抢七绝杀.png"),
-				img09: require("../../../assets/tpqTop/91-快船时期.png"),
-				img10: require("../../../assets/grzl/总决赛大战热火.png"),
-				img11: require("../../../assets/grzl/最佳防守球员.png"),
-				img12: require("../../../assets/grzl/对阵雷霆.png"),
-				img13: require("../../../assets/grzl/持球突破.png"),
-				img14: require("../../../assets/grzl/对阵国王.png"),
-				img15: require("../../../assets/grzl/对阵湖人.png"),
-				img16: require("../../../assets/grzl/对阵奇才.png"),
-				img17: require("../../../assets/grzl/对阵太阳.png"),
-				img18: require("../../../assets/grzl/对阵76人.png"),
-				img19: require("../../../assets/grzl/对阵森林狼.png"),
-				img20: require("../../../assets/grzl/对位勒布朗詹姆斯.png"),
-				img21: require("../../../assets/grzl/对阵灰熊.png"),
-				img22: require("../../../assets/grzl/对阵火箭.png"),
-				img23: require("../../../assets/grzl/总冠军,FMVP.png"),
-				img24: require("../../../assets/tpqTop/85-伦纳德扣篮.png"),
-				img25: require("../../../assets/grzl/starMVP.png"),
-				img26: require("../../../assets/swiperImg/01.png"),
-				img27: require("../../../assets/swiperImg/02.png"),
-				img28: require("../../../assets/swiperImg/03.png"),
+				img01: require("../../../static/tpqTop/0高中与大学时期.png"),
+				img02: require("../../../static/tpqTop/01伦纳德的概述图.png"),
+				img03: require("../../../static/tpqTop/13-马刺新秀.png"),
+				img04: require("../../../static/tpqTop/25-2013-14赛季NBA总冠军、FMVP.png"),
+				img05: require("../../../static/tpqTop/80-伦纳德防守集锦.png"),
+				img06: require("../../../static/tpqTop/40-马刺时期.png"),
+				img07: require("../../../static/tpqTop/52-猛龙时期.png"),
+				img08: require("../../../static/tpqTop/62-抢七绝杀.png"),
+				img09: require("../../../static/tpqTop/91-快船时期.png"),
+				img10: require("../../../static/grzl/总决赛大战热火.png"),
+				img11: require("../../../static/grzl/最佳防守球员.png"),
+				img12: require("../../../static/grzl/对阵雷霆.png"),
+				img13: require("../../../static/grzl/持球突破.png"),
+				img14: require("../../../static/grzl/对阵国王.png"),
+				img15: require("../../../static/grzl/对阵湖人.png"),
+				img16: require("../../../static/grzl/对阵奇才.png"),
+				img17: require("../../../static/grzl/对阵太阳.png"),
+				img18: require("../../../static/grzl/对阵76人.png"),
+				img19: require("../../../static/grzl/对阵森林狼.png"),
+				img20: require("../../../static/grzl/对位勒布朗詹姆斯.png"),
+				img21: require("../../../static/grzl/对阵灰熊.png"),
+				img22: require("../../../static/grzl/对阵火箭.png"),
+				img23: require("../../../static/grzl/总冠军,FMVP.png"),
+				img24: require("../../../static/tpqTop/85-伦纳德扣篮.png"),
+				img25: require("../../../static/grzl/starMVP.png"),
+				img26: require("../../../static/swiperImg/01.png"),
+				img27: require("../../../static/swiperImg/02.png"),
+				img28: require("../../../static/swiperImg/03.png"),
 				cgspjsj: {},
 				hjjlTitle: [],
 				hjjlContent: [],
@@ -599,10 +599,10 @@ import 'swiper/css/swiper.css'
 				flag: 0,
 				showDt: false,
 				centerDialogVisible: false,
-				dialogImg: require("../../../assets/grzl/总决赛大战热火.png"),
-				topMask: true,
+				dialogImg: require("../../../static/grzl/总决赛大战热火.png"),
+				topMask: true
 				// 内嵌页面的路径
-				getRunHouseUrl: '../../../static/runHouse/runHouse.html'
+				// getRunHouseUrl: '../../../static/runHouse/runHouse.html'
 			}
 		},
 		
@@ -690,19 +690,19 @@ import 'swiper/css/swiper.css'
 			},
 			school(){
 				const obj = this.$router.resolve({
-					name: '/show?m=school'
+					name: '#/show?m=school'
 				});
 				window.open(obj.location.name, '_blank');
 			},
 			newImage(){
 				const obj = this.$router.resolve({
-					name: '/show?m=new'
+					name: '#/show?m=new'
 				});
 				window.open(obj.location.name, '_blank');
 			},
 			mvp(){
 				const obj = this.$router.resolve({
-					name: '/show?m=mvp'
+					name: '#/show?m=mvp'
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -712,7 +712,7 @@ import 'swiper/css/swiper.css'
 			},
 			defind(){
 				const obj = this.$router.resolve({
-					name: '/show?m=defind'
+					name: '#/show?m=defind'
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -738,7 +738,7 @@ import 'swiper/css/swiper.css'
 			},
 			mcsq(){
 				const obj = this.$router.resolve({
-					name: '/show?m=mcsq'
+					name: '#/show?m=mcsq'
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -772,13 +772,13 @@ import 'swiper/css/swiper.css'
 			},
 			menglong(){
 				const obj = this.$router.resolve({
-					name: '/show?m=mlsq'
+					name: '#/show?m=mlsq'
 				});
 				window.open(obj.location.name, '_blank');
 			},
 			seven(){
 				const obj = this.$router.resolve({
-					name: '/show?m=seven'
+					name: '#/show?m=seven'
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -788,13 +788,13 @@ import 'swiper/css/swiper.css'
 			},
 			kcsq(){
 				const obj = this.$router.resolve({
-					name: '/show?m=kcsq'
+					name: '#/show?m=kcsq'
 				});
 				window.open(obj.location.name, '_blank');
 			},
 			koulan(){
 				const obj = this.$router.resolve({
-					name: '/show?m=koulan'
+					name: '#/show?m=koulan'
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -883,7 +883,7 @@ import 'swiper/css/swiper.css'
 						font-size: 20px;
 						font-weight: 550;
 						i{
-							color: blue;
+							color: rgb(84, 241, 11);
 						}
 					}
 				}

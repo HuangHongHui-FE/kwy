@@ -78,7 +78,7 @@ export default {
             currentPage: 1,
             // 所有博客信息
             dataList: [],
-            img01: require("../../../assets/blogLogo.png"),
+            img01: require("../../../static/img/blogLogo.png"),
             total: 0,
             // 默认分类
             classify: "未分类",
@@ -117,9 +117,10 @@ export default {
         },
 
         blogContent(_id){
+            // 更新浏览数
             this.$http.post("/user/updateView", {_id: _id})
             const obj = this.$router.resolve({
-                name: `/blogContent?_id=${_id}`
+                name: `#/blogContent?_id=${_id}`
             });
             window.open(obj.location.name, '_blank');
         },

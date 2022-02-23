@@ -3,13 +3,13 @@
 		<!-- 左边中间悬浮的 -->
 		<div class="gd1">
 			<div :class="$route.path === '/funguy/grzl'? 'on':''" @click="switchTo('/funguy/grzl')">
-				<a>个人资料<i class="iconfont icon-ziyuan-copy"></i></a>
+				<a>个人资料<i class="iconfont icon-gerenziliao"></i></a>
 			</div>
 			<div :class="$route.path === '/funguy/tpq'? 'on':''" @click="switchTo('/funguy/tpq')">	
-				<a>图片区&nbsp;&nbsp;<i class="iconfont icon-fanganxiaoguotu"></i></a>
+				<a>图片区&nbsp;&nbsp;<i class="iconfont icon-tupian"></i></a>
 			</div>
 			<div :class="$route.path === '/funguy/spq'? 'on':''" @click="switchTo('/funguy/spq')">
-				<a>视频区&nbsp;&nbsp;<i class="iconfont icon-shipin1"></i></a>
+				<a>视频区&nbsp;&nbsp;<i class="iconfont icon-shipin"></i></a>
 			</div>
 		</div>
 		<router-view></router-view>
@@ -39,12 +39,12 @@
 <style lang="less">
 	.gd1{
 		z-index: 10;
-		background: rgba(0, 0, 0, 0.2);
+		background: rgba(88, 117, 6, 0.2);
 		position: fixed;
 		top: 40%;
 		.on{
-			background-color: #9966FF;
-			border-right: 1px solid #C8C8C8;
+			background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);;
+			border-right: 1px solid #d1eecf;
 		}
 		div{
 			height: 60px;
@@ -59,7 +59,7 @@
 				height: 100%;
 				text-decoration: none;
 				line-height: 60px;
-				font-size: 16px;
+				// font-size: 16px;
 				color: white;	
 				cursor: pointer;
 			}

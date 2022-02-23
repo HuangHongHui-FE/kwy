@@ -5,7 +5,7 @@
                 <el-step title="标题" icon="el-icon-edit"></el-step>
                 <el-step title="内容" icon="el-icon-upload"></el-step>
                 <el-step title="封面" icon="el-icon-picture"></el-step>
-                <el-step title="提交" icon="el-icon-picture"></el-step>
+                <el-step title="提交" icon="el-icon-s-promotion"></el-step>
             </el-steps>
         </div>
         <!-- 标题 -->

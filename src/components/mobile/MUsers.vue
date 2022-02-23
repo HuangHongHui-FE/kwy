@@ -11,8 +11,8 @@
             <!-- 昵称，地址 -->
             <div class="ggzl">
                 <div class="sex_nicheng">
-                    <i class="el-icon-caret-right" v-if="sex === '男'"></i>
-                    <i class="el-icon-caret-left" v-else></i>
+                    <i class="iconfont icon-nan" v-if="sex === '男'"></i>
+                    <i class="iconfont icon-nv" v-else></i>
                     {{nicheng}}
                 </div>
                 <div class="address">{{city}}</div>

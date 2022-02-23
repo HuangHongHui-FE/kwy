@@ -4,19 +4,19 @@
 		<div class="left">
 			<div class="left_index">
 				<div :class="$route.path === '/user/grzl'? 'on': ''" @click="switchTo('/user/grzl')">
-					<i class="iconfont icon-ziyuan-copy"></i>
+					<i class="iconfont icon-gerenziliao"></i>
 					<span>个人信息</span>
 				</div>
 				<div :class="$route.path === '/user/writeBlog'? 'on': ''" @click="switchTo('/user/writeBlog')">
-					<i class="iconfont icon-ziyuan-copy"></i>
+					<i class="iconfont icon-boke"></i>
 					<span>写博客</span>
 				</div>
 				<div :class="$route.path === '/user/seeSelfBlog'? 'on': ''" @click="switchTo('/user/seeSelfBlog')">
-					<i class="iconfont icon-ziyuan-copy"></i>
+					<i class="iconfont icon-boke"></i>
 					<span>博客管理</span>
 				</div>
 				<div :class="$route.path === '/user/uploadPhoto'? 'on': ''" @click="switchTo('/user/uploadPhoto')">
-					<i class="iconfont icon-ziyuan-copy"></i>
+					<i class="iconfont icon-JC_054"></i>
 					<span>图片分享</span>
 				</div>
 			</div>

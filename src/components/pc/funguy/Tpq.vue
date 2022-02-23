@@ -1,5 +1,3 @@
-
-
 <template>
 	<div class="totalDiv" ref="ulRef">
 		<!-- 上方的图册区域 -->
@@ -176,19 +174,19 @@
 			return {
 				// 控制图片上的文字的显示隐藏
 				flag: null,
-				img01: require("../../../assets/tpqTop/80-伦纳德防守集锦.png"),
-				img02: require("../../../assets/tpqTop/1-大学时期的科怀·伦纳德.png"),
-				img03: require("../../../assets/tpqTop/70-幼年伦纳德.png"),
-				img04: require("../../../assets/tpqTop/85-伦纳德扣篮.png"),
-				img05: require("../../../assets/tpqTop/91-快船时期.png"),
-				img06: require("../../../assets/tpqTop/62-抢七绝杀.png"),
-				img07: require("../../../assets/tpqTop/52-猛龙时期.png"),
-				img08: require("../../../assets/tpqTop/40-马刺时期.png"),
-				img09: require("../../../assets/tpqTop/25-2013-14赛季NBA总冠军、FMVP.png"),
-				img10: require("../../../assets/tpqTop/13-马刺新秀.png"),
-				img11: require("../../../assets/tpqTop/97-词条图片.png"),
-				img12: require("../../../assets/tpqTop/01伦纳德的概述图.png"),
-				img13: require("../../../assets/空空如也.png"),
+				img01: require("../../../static/tpqTop/80-伦纳德防守集锦.png"),
+				img02: require("../../../static/tpqTop/1-大学时期的科怀·伦纳德.png"),
+				img03: require("../../../static/tpqTop/70-幼年伦纳德.png"),
+				img04: require("../../../static/tpqTop/85-伦纳德扣篮.png"),
+				img05: require("../../../static/tpqTop/91-快船时期.png"),
+				img06: require("../../../static/tpqTop/62-抢七绝杀.png"),
+				img07: require("../../../static/tpqTop/52-猛龙时期.png"),
+				img08: require("../../../static/tpqTop/40-马刺时期.png"),
+				img09: require("../../../static/tpqTop/25-2013-14赛季NBA总冠军、FMVP.png"),
+				img10: require("../../../static/tpqTop/13-马刺新秀.png"),
+				img11: require("../../../static/tpqTop/97-词条图片.png"),
+				img12: require("../../../static/tpqTop/01伦纳德的概述图.png"),
+				img13: require("../../../static/img/空空如也.png"),
 				// 没搜索时图片数据列表
 				srcList: [],
 				inputContent: null,
@@ -196,7 +194,9 @@
 				// 不是搜索时的页面
 				page: 0,
 				// 图片搜索时的页面
-				searchPage: 0
+				searchPage: 0,
+				// 节流时用了
+				start: 0
 			}
 		},
 		
@@ -219,16 +219,14 @@
 				let scrollTotalLen = document.documentElement.scrollHeight
 				// 窗口高度
 				let clientLen = document.documentElement.clientHeight
-				// console.log(scrollLen, scrollTotalLen, clientLen)
 				if(clientLen - scrollLen >= scrollTotalLen - 1){
 					if(this.inputContent === null){
 						this.page = this.page + 1
-						this.imgGetNext()
+						this.throttle(this.imgGetNext(), 1000)
 					}else{
-						this.searchNext()
+						this.throttle(this.searchNext(), 1000)
 					}
 				}
-
 				//变量scrollTop是滚动条滚动时，距离顶部的距离
 				// var scrollTop = e.target.scrollTop;
 				//变量windowHeight是可视区的高度
@@ -236,17 +234,19 @@
 				//变量scrollHeight是滚动条的总高度
 				// var scrollHeight = e.target.scrollHeight;
 				//滚动条到底部的条件
-				// console.log(this.$refs.ulRef.getBoundingClientRect().top)
-				// console.log(this.$refs.ulRef.getBoundingClientRect().height)
-				// // console.log(this.$refs.maskRef.getBoundingClientRect())
-				// console.log(this.$refs.ulRef.scrollHeight)
-				// console.log(this.$refs.ulRef.clientHeight)
-				// console.log(document.documentElement.getBoundingClientRect())
-				// console.log(document.documentElement.clientHeight)
-				// console.log(document.documentElement.scrollHeight)
-				
-
 			},
+			// 节流函数
+			throttle(callback, wait){
+				return function(){
+					let now = Date.now();
+					if(now - this.start >= wait){
+						callback();
+						this.start = now;
+					}
+				}
+			},
+
+
 			// 鼠标的移入移除图片事件
 			changeActive(e){
 				e.currentTarget.firstElementChild.style = "display: block;"
@@ -273,6 +273,7 @@
 			// 上划触底的图片get
 			async imgGetNext(){
 				let {data: res} = await this.$http.get("/kwy/tpq", { params: {page: this.page} })
+				console.log("d")
 				if(res.meta.status !== 200){ return this.$message.error("请求图片失败！"); }
 				this.srcList = this.srcList.concat(res.data)
 			},
@@ -283,7 +284,6 @@
 				this.oldContent = this.inputContent
 
 				let {data:res} = await this.$http.get("/kwy/tpq/search", { params: {page: this.searchPage, keyWords: this.oldContent} })
-				console.log(res)
 				if(!res.meta.status === 200) { return this.$message.error("请求图片失败") }
 				this.srcList = res.data
 			},

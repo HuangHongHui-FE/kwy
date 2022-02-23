@@ -3,10 +3,10 @@
 		<div class="content">
 			<!-- 头部标题与喜爱数 -->
 			<div class="top">
-				{{videoData === {}? '': videoData.title}}
+				{{videoData == {}? '': videoData.title}}
 				<div>
-					<i class="el-icon-chat-dot-round"></i>
-					{{videoData === {}? '': videoData.love}}
+					<i class="iconfont icon-shipin"></i>
+					{{videoData == {}? '': videoData.love}}
 				</div>
 			</div>
 			
@@ -66,6 +66,7 @@
 		computed:{
 			videoSrcCur(){
 				return this.$http.defaults.baseURL + this.videoSrc
+				// return this.$http.defaults.baseURL + this.videoSrc.slice(8)
 			}
 		}
 	}

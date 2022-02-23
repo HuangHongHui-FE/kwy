@@ -73,7 +73,7 @@ export default{
     data(){
         return {
             dataList: [],
-            img01: require("../../../assets/blogLogo.png"),
+            img01: require("../../../static/img/blogLogo.png"),
             delDialogVisible: false,
             id: '',
             // 分页

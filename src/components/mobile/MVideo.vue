@@ -11,14 +11,15 @@
             </div>
 
             <!-- 双击喜欢  icon -->
-            <div class="love" @click="loveClick">
-                <i class="el-icon-caret-right"></i>
+            <div class="love">
+                <i class="iconfont icon-buxihuan" @click="loveClick" v-if="loveMask"></i>
+                <i class="iconfont icon-xihuan" v-else></i>
                 {{videoPlayCur.love}}
             </div>
 
             <!-- 评论 icon -->
             <div class="comment" @click="commentClick">
-                <i class="el-icon-caret-right"></i>
+                <i class="iconfont icon-pinglun"></i>
                 {{videoPlayCur.length===0? '': videoPlayCur.comments.length}}
             </div>
             <!-- 标题 -->
@@ -47,10 +48,6 @@
             </div>
         </div>
 
-        <!-- 双击与点击love时的动画 -->
-        <div class="loveDonghua" v-if="loveFlag">
-            <i class="el-icon-video-pause"></i>
-        </div>
     </div>
 </template>
 
@@ -84,8 +81,8 @@ export default {
             startTime: 0,
             // 当前视频在所有视频数据中的下标
             index: 0,
-            // love动画
-            loveFlag: false
+            // love点击
+            loveMask: true
         }
     },
     created(){
@@ -127,7 +124,7 @@ export default {
                 // 长按,两秒内没有被清除就代表是长按，下载
                 this.lenPress = setTimeout((res) => {
                     this.downloadFlag = true
-                },1500);
+                }, 1500);
 
                 // 双击单击触发事件
                 if(this.clickid === 1) {
@@ -225,8 +222,7 @@ export default {
         // 这里可以加上节流，防抖函数！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
         // 点击love的标志
         async loveClick(){
-            this.loveFlag = true
-            // this.loveFlag = false
+            this.loveMask = false
 
             let {data: res} = await this.$http.post("/videoLovePush", {_id: this.videoPlayCur._id})
             if(res.meta.status !== 200){ return this.$message.error("点赞失败！") }
@@ -358,47 +354,7 @@ export default {
             bottom: 6vh;
         }
     }
-    // love动画的样式
-    .loveDonghua{
-        position: fixed;
-        // width: 3vw;
-        // height: 2vh;
-        // font-size: 3vh;
-        // opacity: 0;
-        top: 40vh;
-        right: 6vw;
-        animation-name: love;
-        animation-duration: 0.2s;
-        animation-iteration-count: 8;
-        animation-direction: alternate;
-    }
-    @keyframes love{
-        0%{
-            font-size: 5vw;
-            color: rgb(250, 9, 9);
-            // border-left: 2px solid red;
-        }
-        25%{
-            font-size: 6vw;
-            color: rgb(185, 247, 15);
-            // border-bottom: 2px solid rgb(6, 10, 231);
-        }
-        50%{
-            font-size: 7vw;
-            color: rgb(9, 63, 243);
-            // border-right: 2px solid rgb(255, 230, 0);
-        }
-        75%{
-            font-size: 8vw;
-            color: rgb(193, 12, 248);
-            // border-top: 2px solid rgb(255, 0, 242);
-        }
-        100%{
-            font-size: 9vw;
-            color: rgb(255, 0, 0);
-            // border-left: 2px solid rgb(243, 242, 242);
-        }
-    }
+    
     // 评论显示出来的动画
     @keyframes comment {
         0% {

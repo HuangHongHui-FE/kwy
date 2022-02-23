@@ -29,7 +29,7 @@
 export default {
     data(){
         return {
-            // img01: require('../../../assets/01.png'),
+            // img01: require('../../../static/01.png'),
             leonardData: [],
             page: 0
         }

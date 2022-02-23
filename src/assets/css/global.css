@@ -11,4 +11,6 @@ html, body {
   background-color: #E0FFFF;
   line-height: 30px;
   /* min-width: 1000px; */
+  /* overflow-y: hidden */
+  
 }

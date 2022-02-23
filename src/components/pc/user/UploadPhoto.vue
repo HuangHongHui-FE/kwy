@@ -12,7 +12,7 @@
             <div class="inputSubmit">
                 <el-input placeholder="请输入图册的优美描述" v-model="formData.inputTitle">
                     <template #append>
-                        <el-button icon="el-icon-search" @click="dialogShow">提交图册</el-button>
+                        <el-button icon="el-icon-s-promotion" @click="dialogShow">提交图册</el-button>
                     </template>
                 </el-input>
             </div>
@@ -113,7 +113,7 @@ export default {
 
             let formdata = new FormData()
             for (let i = 0; i < this.formData.file.length; i++) {
-                console.log(this.formData.file[i])
+                // console.log(this.formData.file[i])
                 formdata.append('multerShare', this.formData.file[i]);
             }
 

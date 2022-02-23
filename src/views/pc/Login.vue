@@ -12,7 +12,7 @@
 		<div v-if="flag==0? true: false">
 			<!-- 头像区域 -->
 			<div class="avatar_box">
-				<img src="../../assets/touxiang.jpg">
+				<img src="../../static/img/touxiang.jpg">
 			</div>
 			
 			<!-- 登陆表单区域     ref用来后面获取实例对象-->
@@ -44,7 +44,7 @@
 		<div v-if="flag==1? true: false">
 			<!-- 头像区域 -->
 			<div class="avatar_box">
-				<img src="../../assets/touxiang.jpg">
+				<img src="../../static/img/touxiang.jpg">
 			</div>
 			
 			<!-- 注册表单区域     ref用来后面获取实例对象-->

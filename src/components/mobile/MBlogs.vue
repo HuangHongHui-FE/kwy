@@ -30,9 +30,9 @@
                     <div class="blog_right">
                         <div @click="goBlogContent(item)">{{item.inputTitle}}</div>
                         <div>
-                            <i class="el-icon-caret-right"></i>{{item.views}}
+                            <i class="iconfont icon-yuedu"></i>{{item.views}}
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <i class="el-icon-caret-right"></i>{{item.comments.length}}
+                            <i class="iconfont icon-pinglun"></i>{{item.comments.length}}
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default {
             // 所有博客数据
             dataList: [],
             // 
-            imgBlogLogo: require("../../assets/blogLogo.png")
+            imgBlogLogo: require("../../static/img/blogLogo.png")
         }
     },
     created(){
@@ -105,7 +105,7 @@ export default {
             this.$http.post("/user/updateView", {_id: item.id})
             this.inputBlog = ''
             const obj = this.$router.resolve({
-                name: `/blogContent?_id=${item.id}`
+                name: `#/blogContent?_id=${item.id}`
             });
             window.open(obj.location.name, '_blank');
         },
@@ -170,7 +170,7 @@ export default {
             // 点一下就增加一次阅读数
             this.$http.post("/user/updateView", {_id: item._id})
             const obj = this.$router.resolve({
-                name: `/blogContent?_id=${item._id}`
+                name: `#/blogContent?_id=${item._id}`
             });
             window.open(obj.location.name, '_blank');
         },
