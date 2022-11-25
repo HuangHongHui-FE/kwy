@@ -206,6 +206,7 @@
            		}
            		var reader = new FileReader();
            		reader.onload = res => {
+					//    console.log(res.target.result)
            			this.imgSrcPre = res.target.result;
            		}
 				//将文件以Data URL形式读入页面

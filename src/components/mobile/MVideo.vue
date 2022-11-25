@@ -120,6 +120,7 @@ export default {
         },
         touchStart(e){
             if(e.touches.length === 1){
+                // 开始点击的位置
                 this.startPosition = e.touches[0]
                 // 长按,两秒内没有被清除就代表是长按，下载
                 this.lenPress = setTimeout((res) => {
@@ -130,13 +131,17 @@ export default {
                 if(this.clickid === 1) {
                     this.startTime = new Date().getTime();
                     this.clickid++;
-                    this.doubleTimer = setTimeout((res) => {
+                    // 双击的定时器
+                    this.doubleTimer = setTimeout(() => {
+                        // 触发单击事件
                         this.oneClick();
                         this.clickid = 1;
                     }, 300)
                 }
+                // 这时候才是单击
                 if(this.clickid === 2) {
                     this.clickid++;
+                // 这时候是双击或者多击
                 } else {
                     var endTime = new Date().getTime();
                     if((endTime - this.startTime) < 300) {

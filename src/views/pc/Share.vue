@@ -99,7 +99,7 @@
 				this.$http.post("/user/updateView", {_id: item.id})
 				this.inputBlog = ''
 				const obj = this.$router.resolve({
-					name: `/blogContent?_id=${item.id}`
+					name: `#/blogContent?_id=${item.id}`
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -144,7 +144,7 @@
 			async handleSelectLeonard (item) {
 				console.log(item)
 				const obj = this.$router.resolve({
-					name: `/leonardShow?id=${item.id}`
+					name: `#/leonardShow?id=${item.id}`
 				});
 				window.open(obj.location.name, '_blank');
 			},
@@ -175,6 +175,7 @@
 
 
 	.maxDiv{
+		
 		margin: 2% 0;
 		display: flex;
 		.left{

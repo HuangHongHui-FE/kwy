@@ -227,6 +227,8 @@
 						this.throttle(this.searchNext(), 1000)
 					}
 				}
+
+				// console.log(scrollLen)
 				//变量scrollTop是滚动条滚动时，距离顶部的距离
 				// var scrollTop = e.target.scrollTop;
 				//变量windowHeight是可视区的高度
@@ -257,7 +259,7 @@
 			// 跳转到分类图片展示区
 			toShow(mark){
 				const obj = this.$router.resolve({
-					name: `/show?m=${mark}`
+					name: `#/show?m=${mark}`
 				});
 				window.open(obj.location.name, '_blank');
 			},

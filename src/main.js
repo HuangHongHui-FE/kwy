@@ -18,7 +18,18 @@ import loading from './static/img/loading.png'
 axios.defaults.baseURL = "http://127.0.0.1:3000/"
 // axios.defaults.baseURL = "http://82.157.53.221:3000/"
 // axios.defaults.baseURL = "http://192.168.174.128:8890/"
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
+
+if(window.sessionStorage.getItem('username') && window.sessionStorage.getItem('pwd')){
+	axios.interceptors.request.use(config => {
+		// console.log(config)
+			config.headers.Authorization = window.sessionStorage.getItem('username') + window.sessionStorage.getItem('pwd')
+		
+		// 在最后必须要return,为每次api请求挂载token
+		// console.log(config)
+		return config
+	})
+}
 
 Vue.prototype.$http = axios
 

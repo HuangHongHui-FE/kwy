@@ -190,7 +190,6 @@ export default{
         upload(e){
             let target = e.target || e.srcElement
            	let file = target.files[0]
-
             if (file) {
                 let reader = new FileReader();
                 //将文件以Data URL形式读入页面
@@ -216,12 +215,12 @@ export default{
             if(res.meta.status === 200){
                 this.subDialogVisible = false
                 this.$message.success("发表成功！")
-                
                 this.$router.replace("/user/seeSelfBlog")
             }else{
                 return this.$message.error("发表失败！")
             }
         },
+        
         // 提交前的提示
         showSubDialog(){
             console.log(this.value)
@@ -238,7 +237,7 @@ export default{
         },
         async getClassify(){
             let {data: res} = await this.$http.get("/user/writeBlog/classify")
-            console.log(res)
+            // console.log(res)
             if(res.meta.status !== 200){ return this.$message.error("获取分类数据失败！") }
             this.options = this.options.concat(res.data)
         }

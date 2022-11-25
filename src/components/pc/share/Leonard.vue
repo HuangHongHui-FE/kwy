@@ -55,7 +55,7 @@ export default {
         goLeonardShow(item){
             // console.log(item)
             const obj = this.$router.resolve({
-                name: `/leonardShow?item=${item.files}`
+                name: `#/leonardShow?item=${item.files}`
             });
             window.open(obj.location.name, '_blank');
         },

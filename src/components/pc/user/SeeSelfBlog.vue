@@ -132,7 +132,7 @@ export default{
         // 博客详情页面
         blogContent(_id){
             const obj = this.$router.resolve({
-                name: `/blogContent?_id=${_id}`
+                name: `#/blogContent?_id=${_id}`
                 // name: `/blogContent`,
                 // params: {
                 //     _id: _id

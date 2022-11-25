@@ -171,7 +171,7 @@ import 'swiper/css/swiper.css'
 			// 博客详情页面
 			blogContent(_id){
 				const obj = this.$router.resolve({
-					name: `/blogContent?_id=${_id}`
+					name: `#/blogContent?_id=${_id}`
 					// name: `/blogContent`,
 					// params: {
 					//     _id: _id
@@ -182,7 +182,7 @@ import 'swiper/css/swiper.css'
 			// 跳转到socket页面
 			goSocket(){
 				const obj = this.$router.resolve({
-					name: '/socket'
+					name: '#/socket'
 				});
 				window.open(obj.location.name, '_blank');
 			}
